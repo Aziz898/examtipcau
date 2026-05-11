@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Management Exam · Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-0: #0a0a14;
+  --bg-1: #12121f;
+  --bg-2: #1a1a2e;
+  --line: rgba(255,255,255,0.08);
+  --line-strong: rgba(255,255,255,0.16);
+  --text: #f0f0f5;
+  --text-dim: #9999a8;
+  --text-mute: #6b6b7a;
+  --accent: #7c5cff;
+  --accent-2: #4ad6ff;
+  --green: #2dd4a4;
+  --red: #ff5470;
+  --amber: #ffb547;
+  --glow-accent: rgba(124,92,255,0.35);
+  --glow-green: rgba(45,212,164,0.35);
+  --glow-red: rgba(255,84,112,0.35);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  background: var(--bg-0);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(800px 600px at 15% 10%, rgba(124,92,255,0.18), transparent 60%),
+    radial-gradient(700px 500px at 85% 90%, rgba(74,214,255,0.12), transparent 60%),
+    radial-gradient(500px 400px at 50% 50%, rgba(255,84,112,0.08), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+.app {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 20px 48px;
+}
+
+/* ===== HEADER ===== */
+.top {
+  width: 100%;
+  max-width: 880px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-dot {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 16px;
+  color: #0a0a14;
+  box-shadow: 0 8px 24px var(--glow-accent);
+}
+
+.brand-text { font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+.brand-sub  { font-size: 11px; color: var(--text-mute); letter-spacing: 0.08em; text-transform: uppercase; font-family: 'JetBrains Mono', monospace; }
+
+.top-stats {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  display: flex;
+  gap: 16px;
+}
+
+/* ===== CARD ===== */
+.card {
+  width: 100%;
+  max-width: 880px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(600px 200px at 50% -20%, rgba(124,92,255,0.15), transparent 70%);
+  pointer-events: none;
+}
+
+/* ===== START SCREEN ===== */
+.hero { text-align: center; padding: 16px 0 8px; position: relative; }
+.hero-eyebrow {
+  display: inline-block;
+  padding: 6px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.hero h1 {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 14px;
+  background: linear-gradient(180deg, #fff 0%, #b8b8c8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero p {
+  color: var(--text-dim);
+  font-size: 15px;
+  max-width: 520px;
+  margin: 0 auto 32px;
+  line-height: 1.55;
+}
+
+.modes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.mode {
+  text-align: left;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
+  color: inherit;
+}
+
+.mode::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: -1;
+}
+
+.mode:hover {
+  border-color: var(--line-strong);
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.05);
+}
+
+.mode.featured {
+  background: linear-gradient(135deg, rgba(124,92,255,0.15), rgba(74,214,255,0.08));
+  border-color: rgba(124,92,255,0.35);
+}
+
+.mode-label {
+  font-size: 11px;
+  color: var(--text-mute);
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.mode-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 4px;
+}
+
+.mode-meta {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.mode.featured .mode-label { color: var(--accent-2); }
+
+/* ===== QUIZ SCREEN ===== */
+.quiz-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 0.04em;
+}
+
+.quiz-head .pill {
+  padding: 4px 10px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.progress {
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 999px;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 12px var(--glow-accent);
+}
+
+.q-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  margin-bottom: 12px;
+  letter-spacing: 0.1em;
+}
+
+.q-text {
+  font-size: 22px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-bottom: 28px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.025);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  position: relative;
+}
+
+.opt:hover:not(.locked) {
+  border-color: var(--line-strong);
+  background: rgba(255,255,255,0.05);
+  transform: translateX(4px);
+}
+
+.opt-letter {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  transition: all 0.18s ease;
+}
+
+.opt-text {
+  flex: 1;
+  font-size: 15px;
+  line-height: 1.45;
+  padding-top: 3px;
+}
+
+.opt.correct {
+  border-color: var(--green);
+  background: rgba(45,212,164,0.08);
+  box-shadow: 0 0 0 1px var(--green) inset, 0 8px 24px var(--glow-green);
+}
+.opt.correct .opt-letter {
+  background: var(--green);
+  color: #0a0a14;
+  border-color: var(--green);
+}
+
+.opt.wrong {
+  border-color: var(--red);
+  background: rgba(255,84,112,0.08);
+  box-shadow: 0 0 0 1px var(--red) inset, 0 8px 24px var(--glow-red);
+}
+.opt.wrong .opt-letter {
+  background: var(--red);
+  color: #0a0a14;
+  border-color: var(--red);
+}
+
+.opt.dimmed { opacity: 0.45; }
+.opt.locked { cursor: default; }
+.opt.locked:hover { transform: none; }
+
+.explain {
+  margin-top: 20px;
+  padding: 20px 22px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.03);
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, max-height 0.4s ease, margin 0.3s ease, padding 0.3s ease;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-width: 0;
+  margin-top: 0;
+}
+.explain.show {
+  max-height: 800px;
+  opacity: 1;
+  padding: 20px 22px;
+  margin-top: 20px;
+  border-width: 1px;
+}
+
+.explain-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.explain.correct .explain-head { color: var(--green); }
+.explain.wrong .explain-head { color: var(--red); }
+
+.explain-head .badge {
+  display: inline-grid;
+  place-items: center;
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 800;
+}
+.explain.correct .explain-head .badge { background: var(--green); color: #0a0a14; }
+.explain.wrong   .explain-head .badge { background: var(--red);   color: #0a0a14; }
+
+.explain-body {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.explain-body .why-label {
+  color: var(--text-mute);
+  font-size: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: block;
+  margin: 14px 0 6px;
+}
+.explain-body .why-label:first-child { margin-top: 0; }
+
+.actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn {
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14.5px;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  transition: all 0.18s ease;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.btn:hover { background: rgba(255,255,255,0.08); border-color: var(--line-strong); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  border-color: transparent;
+  color: #0a0a14;
+  font-weight: 700;
+  box-shadow: 0 10px 28px var(--glow-accent);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 36px var(--glow-accent); }
+.btn-ghost { background: transparent; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+/* ===== RESULT ===== */
+.result { text-align: center; padding: 16px 0; }
+.score-ring {
+  width: 200px; height: 200px;
+  margin: 8px auto 24px;
+  position: relative;
+}
+.score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.score-ring circle {
+  fill: none;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+.score-ring .track { stroke: rgba(255,255,255,0.08); }
+.score-ring .bar {
+  stroke: url(#scoreGradient);
+  stroke-dasharray: 565.48;
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 0 10px var(--glow-accent));
+}
+.score-text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+.score-text .pct {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(180deg, #fff, #b8b8c8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+}
+.score-text .frac {
+  font-size: 12px;
+  color: var(--text-dim);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 6px;
+  letter-spacing: 0.1em;
+}
+
+.verdict {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-bottom: 8px;
+}
+.verdict-sub { color: var(--text-dim); font-size: 14px; margin-bottom: 28px; }
+
+.result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.stat {
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.025);
+}
+.stat-num {
+  font-size: 24px;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.02em;
+}
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-top: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.stat.correct .stat-num { color: var(--green); }
+.stat.wrong .stat-num { color: var(--red); }
+
+.result-actions { display: flex; gap: 10px; justify-content: center; }
+
+/* ===== REVIEW LIST ===== */
+.review {
+  margin-top: 32px;
+  text-align: left;
+}
+.review h3 {
+  font-size: 13px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 16px;
+}
+.review-item {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+}
+.review-item .dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 6px;
+}
+.review-item.ok .dot   { background: var(--green); box-shadow: 0 0 8px var(--glow-green); }
+.review-item.fail .dot { background: var(--red);   box-shadow: 0 0 8px var(--glow-red); }
+.review-item .qno {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-mute);
+  font-size: 12px;
+  flex-shrink: 0;
+  width: 32px;
+}
+.review-item .qt { flex: 1; color: var(--text-dim); line-height: 1.4; }
+
+.hidden { display: none !important; }
+
+/* ===== ANIM ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeUp 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .card { padding: 24px 20px; border-radius: 18px; }
+  .hero h1 { font-size: 28px; }
+  .q-text { font-size: 18px; }
+  .modes { grid-template-columns: 1fr; }
+  .top { margin-bottom: 20px; }
+  .top-stats { display: none; }
+  .actions { flex-direction: column; }
+  .actions .btn { width: 100%; justify-content: center; }
+  .score-ring { width: 160px; height: 160px; }
+  .score-text .pct { font-size: 42px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <div class="brand-dot">M</div>
+      <div>
+        <div class="brand-text">Management Exam</div>
+        <div class="brand-sub">Practice Mode</div>
+      </div>
+    </div>
+    <div class="top-stats" id="topStats"></div>
+  </header>
+
+  <!-- START -->
+  <main class="card fade-in" id="screenStart">
+    <div class="hero">
+      <span class="hero-eyebrow">100 Questions · 3 Mock Exams</span>
+      <h1>Prep for the final.<br>One question at a time.</h1>
+      <p>Pick a mode. After each answer — a detailed breakdown: why the correct option is right and what's wrong with the others.</p>
+    </div>
+    <div class="modes">
+      <button class="mode featured" data-mode="all">
+        <div class="mode-label">Full Exam</div>
+        <div class="mode-title">All Questions</div>
+        <div class="mode-meta">100 questions · all three mocks</div>
+      </button>
+      <button class="mode featured" data-mode="random">
+        <div class="mode-label">Quick Run</div>
+        <div class="mode-title">Random 20</div>
+        <div class="mode-meta">random sample from 100</div>
+      </button>
+      <button class="mode" data-mode="mock1">
+        <div class="mode-label">Mock 01</div>
+        <div class="mode-title">Decision · Strategy · IT</div>
+        <div class="mode-meta">40 questions</div>
+      </button>
+      <button class="mode" data-mode="mock2">
+        <div class="mode-label">Mock 02</div>
+        <div class="mode-title">Ethics · Global · Theory</div>
+        <div class="mode-meta">40 questions</div>
+      </button>
+      <button class="mode" data-mode="mock3" style="grid-column: span 2;">
+        <div class="mode-label">Mock 03</div>
+        <div class="mode-title">Leadership · Structure · Control</div>
+        <div class="mode-meta">20 questions</div>
+      </button>
+    </div>
+  </main>
+
+  <!-- QUIZ -->
+  <main class="card hidden" id="screenQuiz">
+    <div class="quiz-head">
+      <span class="pill" id="modeLabel">MODE</span>
+      <span id="counter">01 / 20</span>
+    </div>
+    <div class="progress"><div class="progress-bar" id="progressBar" style="width: 0%;"></div></div>
+
+    <div class="q-num" id="qNum">QUESTION 01</div>
+    <div class="q-text" id="qText"></div>
+    <div class="options" id="opts"></div>
+
+    <div class="explain" id="explain">
+      <div class="explain-head" id="explainHead"></div>
+      <div class="explain-body" id="explainBody"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-ghost" id="quitBtn">← Quit</button>
+      <button class="btn btn-primary" id="nextBtn" disabled>Next →</button>
+    </div>
+  </main>
+
+  <!-- RESULT -->
+  <main class="card hidden" id="screenResult">
+    <div class="result">
+      <div class="score-ring">
+        <svg viewBox="0 0 200 200">
+          <defs>
+            <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#7c5cff"/>
+              <stop offset="100%" stop-color="#4ad6ff"/>
+            </linearGradient>
+          </defs>
+          <circle class="track" cx="100" cy="100" r="90"/>
+          <circle class="bar" id="scoreBar" cx="100" cy="100" r="90"/>
+        </svg>
+        <div class="score-text">
+          <div>
+            <div class="pct" id="scorePct">0%</div>
+            <div class="frac" id="scoreFrac">0 / 0</div>
+          </div>
+        </div>
+      </div>
+      <div class="verdict" id="verdict">—</div>
+      <div class="verdict-sub" id="verdictSub">—</div>
+
+      <div class="result-stats">
+        <div class="stat correct">
+          <div class="stat-num" id="rsCorrect">0</div>
+          <div class="stat-label">Correct</div>
+        </div>
+        <div class="stat wrong">
+          <div class="stat-num" id="rsWrong">0</div>
+          <div class="stat-label">Wrong</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="rsTime">0:00</div>
+          <div class="stat-label">Time</div>
+        </div>
+      </div>
+
+      <div class="result-actions">
+        <button class="btn" id="homeBtn">Home</button>
+        <button class="btn btn-primary" id="retryBtn">Try Again</button>
+      </div>
+
+      <div class="review" id="review"></div>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+import { QUESTIONS } from './questions.js';
+const $ = (id) => document.getElementById(id);
+
+const state = {
+  mode: null,
+  set: [],          // массив вопросов
+  i: 0,             // индекс
+  picked: null,     // выбранный индекс
+  results: [],      // [{id, correct, picked}]
+  startedAt: 0,
+};
+
+const MODE_META = {
+  all:    { label: 'ALL · 100', title: 'Все вопросы' },
+  random: { label: 'RANDOM · 20', title: 'Случайные 20' },
+  mock1:  { label: 'MOCK 01 · 40', title: 'Mock 1' },
+  mock2:  { label: 'MOCK 02 · 40', title: 'Mock 2' },
+  mock3:  { label: 'MOCK 03 · 20', title: 'Mock 3' },
+};
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildSet(mode) {
+  if (mode === 'all')    return QUESTIONS.slice();
+  if (mode === 'random') return shuffle(QUESTIONS).slice(0, 20);
+  if (mode === 'mock1')  return QUESTIONS.filter(q => q.mock === 1);
+  if (mode === 'mock2')  return QUESTIONS.filter(q => q.mock === 2);
+  if (mode === 'mock3')  return QUESTIONS.filter(q => q.mock === 3);
+  return [];
+}
+
+function startQuiz(mode) {
+  state.mode = mode;
+  state.set = buildSet(mode);
+  state.i = 0;
+  state.results = [];
+  state.startedAt = Date.now();
+
+  $('screenStart').classList.add('hidden');
+  $('screenResult').classList.add('hidden');
+  $('screenQuiz').classList.remove('hidden');
+  $('screenQuiz').classList.add('fade-in');
+
+  $('modeLabel').textContent = MODE_META[mode].label;
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = state.set[state.i];
+  state.picked = null;
+
+  const total = state.set.length;
+  const n = state.i + 1;
+  $('counter').textContent = `${String(n).padStart(2,'0')} / ${String(total).padStart(2,'0')}`;
+  $('progressBar').style.width = `${((state.i) / total) * 100}%`;
+  $('qNum').textContent = `QUESTION ${String(n).padStart(2,'0')} · MOCK ${q.mock}`;
+  $('qText').textContent = q.q;
+
+  const letters = ['A','B','C','D'];
+  const opts = $('opts');
+  opts.innerHTML = '';
+  q.options.forEach((text, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `
+      <span class="opt-letter">${letters[idx]}</span>
+      <span class="opt-text">${text}</span>
+    `;
+    btn.addEventListener('click', () => handlePick(idx));
+    opts.appendChild(btn);
+  });
+
+  // reset explain & next
+  const explain = $('explain');
+  explain.classList.remove('show', 'correct', 'wrong');
+  $('nextBtn').disabled = true;
+  $('nextBtn').textContent = state.i === state.set.length - 1 ? 'Результат →' : 'Дальше →';
+
+  // re-animate
+  $('screenQuiz').classList.remove('fade-in');
+  void $('screenQuiz').offsetWidth;
+  $('screenQuiz').classList.add('fade-in');
+}
+
+function handlePick(idx) {
+  if (state.picked !== null) return;
+  const q = state.set[state.i];
+  state.picked = idx;
+  state.results.push({ id: q.id, picked: idx, correct: idx === q.correct, q });
+
+  const opts = document.querySelectorAll('.opt');
+  opts.forEach((el, i) => {
+    el.classList.add('locked');
+    if (i === q.correct) el.classList.add('correct');
+    else if (i === idx)  el.classList.add('wrong');
+    else el.classList.add('dimmed');
+  });
+
+  const isCorrect = idx === q.correct;
+  const explain = $('explain');
+  explain.classList.add('show', isCorrect ? 'correct' : 'wrong');
+  $('explainHead').innerHTML = isCorrect
+    ? `<span class="badge">✓</span><span>Верно</span>`
+    : `<span class="badge">✕</span><span>Неверно</span>`;
+
+  const letters = ['A','B','C','D'];
+  let body = '';
+  if (!isCorrect) {
+    body += `<span class="why-label">Твой ответ — ${letters[idx]}</span>${q.explain[idx]}`;
+    body += `<span class="why-label">Правильный ответ — ${letters[q.correct]}</span>${q.explain[q.correct]}`;
+  } else {
+    body += `<span class="why-label">Почему ${letters[q.correct]} верно</span>${q.explain[q.correct]}`;
+    // show why others are wrong
+    const otherIdxs = [0,1,2,3].filter(i => i !== q.correct);
+    body += `<span class="why-label">Почему остальные неверны</span>`;
+    otherIdxs.forEach(i => {
+      body += `<div style="margin-top:8px;"><b style="color:var(--text-dim);font-family:'JetBrains Mono',monospace;font-size:12px;">${letters[i]}.</b> ${q.explain[i]}</div>`;
+    });
+  }
+  $('explainBody').innerHTML = body;
+
+  $('nextBtn').disabled = false;
+  $('progressBar').style.width = `${((state.i + 1) / state.set.length) * 100}%`;
+}
+
+function nextQuestion() {
+  if (state.i < state.set.length - 1) {
+    state.i++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function fmtTime(ms) {
+  const s = Math.round(ms / 1000);
+  return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+}
+
+function showResult() {
+  $('screenQuiz').classList.add('hidden');
+  $('screenResult').classList.remove('hidden');
+  $('screenResult').classList.add('fade-in');
+
+  const total = state.results.length;
+  const correct = state.results.filter(r => r.correct).length;
+  const wrong = total - correct;
+  const pct = Math.round((correct / total) * 100);
+  const elapsed = Date.now() - state.startedAt;
+
+  $('scorePct').textContent = `${pct}%`;
+  $('scoreFrac').textContent = `${correct} / ${total}`;
+  $('rsCorrect').textContent = correct;
+  $('rsWrong').textContent = wrong;
+  $('rsTime').textContent = fmtTime(elapsed);
+
+  // animate ring
+  const circumference = 2 * Math.PI * 90;
+  const bar = $('scoreBar');
+  bar.style.strokeDasharray = circumference;
+  bar.style.strokeDashoffset = circumference;
+  setTimeout(() => {
+    bar.style.strokeDashoffset = circumference * (1 - pct / 100);
+  }, 100);
+
+  // verdict
+  let v = '', vs = '';
+  if (pct >= 90)      { v = 'Огонь.'; vs = 'Готов к экзамену. Можно повторить слабые места.'; }
+  else if (pct >= 75) { v = 'Очень хорошо.'; vs = 'Закрепи ошибки — и сдашь без проблем.'; }
+  else if (pct >= 60) { v = 'Норм, но есть пробелы.'; vs = 'Пройди ещё раз и разбери ошибки.'; }
+  else if (pct >= 40) { v = 'Слабовато.'; vs = 'Нужно повторить материал и снова сюда.'; }
+  else                { v = 'Беда.'; vs = 'Перечитай теорию и возвращайся.'; }
+  $('verdict').textContent = v;
+  $('verdictSub').textContent = vs;
+
+  // review
+  const reviewEl = $('review');
+  if (wrong > 0) {
+    reviewEl.innerHTML = `<h3>Что разобрать</h3>` + state.results
+      .filter(r => !r.correct)
+      .map((r, i) => `
+        <div class="review-item fail">
+          <span class="dot"></span>
+          <span class="qno">Q${r.q.id}</span>
+          <span class="qt">${r.q.q}</span>
+        </div>
+      `).join('');
+  } else {
+    reviewEl.innerHTML = `<h3>Чистый прогон</h3>
+      <div class="review-item ok">
+        <span class="dot"></span>
+        <span class="qt">Все вопросы решены правильно. Респект.</span>
+      </div>`;
+  }
+}
+
+function backToStart() {
+  $('screenQuiz').classList.add('hidden');
+  $('screenResult').classList.add('hidden');
+  $('screenStart').classList.remove('hidden');
+  $('screenStart').classList.add('fade-in');
+}
+
+// ===== EVENTS =====
+document.querySelectorAll('.mode').forEach(el => {
+  el.addEventListener('click', () => startQuiz(el.dataset.mode));
+});
+$('nextBtn').addEventListener('click', nextQuestion);
+$('quitBtn').addEventListener('click', () => {
+  if (confirm('Выйти? Прогресс не сохранится.')) backToStart();
+});
+$('retryBtn').addEventListener('click', () => startQuiz(state.mode));
+$('homeBtn').addEventListener('click', backToStart);
+
+// keyboard
+document.addEventListener('keydown', (e) => {
+  if ($('screenQuiz').classList.contains('hidden')) return;
+  if (state.picked === null) {
+    const k = e.key.toLowerCase();
+    const map = { '1': 0, '2': 1, '3': 2, '4': 3, 'a': 0, 'b': 1, 'c': 2, 'd': 3 };
+    if (k in map) {
+      const idx = map[k];
+      const opts = document.querySelectorAll('.opt');
+      if (opts[idx]) handlePick(idx);
+    }
+  } else if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    nextQuestion();
+  }
+});
+
+// top stats
+$('topStats').innerHTML = `<span>100 Q</span><span>3 MOCKS</span>`;
+</script>
+</body>
+</html>
